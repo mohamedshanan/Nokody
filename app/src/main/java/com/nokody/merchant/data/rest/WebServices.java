@@ -1,5 +1,7 @@
 package com.nokody.merchant.data.rest;
 
+import android.support.annotation.StringRes;
+
 import com.nokody.merchant.data.models.HistoryResponse;
 import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
@@ -21,7 +23,7 @@ public interface WebServices {
     Call<HistoryResponse> getHistory(@Query("day") String day);
 
     @GET("account/validate/{userId}/{amount}")
-    Call<String> requestPayment(@Path("userID") Integer userId, @Path("amount") Double amount);
+    Call<String> requestPayment(@Path("userID") String userId, @Path("amount") Double amount);
 
 
 }

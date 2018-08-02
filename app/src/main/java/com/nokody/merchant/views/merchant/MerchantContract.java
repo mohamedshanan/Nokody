@@ -6,20 +6,22 @@ import android.support.annotation.StringRes;
 import com.nokody.merchant.data.models.Transaction;
 
 import java.util.List;
-import java.util.Map;
 
 public class MerchantContract {
 
     interface View {
         void showLoading(boolean show);
-        void showNoData(boolean show, @StringRes int strId);
-        void showTransactionsHistory(List<Transaction> transactionsHistory);
+        void showError(boolean show, @StringRes int strId);
+        void showError(boolean show, String errorMessage);
+        void clearError();
         boolean hasConnection();
         void showNotConnected();
+        void showValidationSuccess();
     }
 
     interface Presenter {
         void attachView(MerchantContract.View view);
         void getTransactions(String day);
+        void validate(String userId, Double amount);
     }
 }

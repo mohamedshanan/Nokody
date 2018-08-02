@@ -53,7 +53,7 @@ public class TransactionsRepo {
                 });
     }
 
-    public void requestPayment(Integer userId, Double amount , RequestPaymentCallBack requestPaymentCallBack) {
+    public void requestPayment(String userId, Double amount , RequestPaymentCallBack requestPaymentCallBack) {
 
         apiEndPointInterface.requestPayment(userId, amount)
                 .enqueue(new Callback<String>() {

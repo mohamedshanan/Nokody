@@ -17,4 +17,11 @@
     <string name="home">Home</string>
     <string name="no_data">No transactions history found</string>
     <string name="req_payment_error">Couldnot proceed with your request please try again.</string>
+    <string name="enter_purchase_amount">Enter purchase amount</string>
+    <string name="amount">Amount</string>
+    <string name="enter_passport_number">Enter passport number</string>
+    <string name="or">OR</string>
+    <string name="next">NEXT</string>
+    <string name="enter_pin_code">Enter your pin code</string>
+    <string name="make_payment">Make Payment</string>
 </resources>

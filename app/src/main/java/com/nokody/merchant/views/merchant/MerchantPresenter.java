@@ -1,8 +1,11 @@
 package com.nokody.merchant.views.merchant;
 
+import android.support.annotation.StringRes;
+
 import com.nokody.merchant.R;
 import com.nokody.merchant.data.models.Transaction;
 import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
+import com.nokody.merchant.data.models.callbacks.RequestPaymentCallBack;
 import com.nokody.merchant.data.repositories.TransactionsRepo;
 
 import java.lang.ref.WeakReference;
@@ -19,6 +22,38 @@ public class MerchantPresenter implements MerchantContract.Presenter {
 
     @Override
     public void getTransactions(String day) {
+//        if (mViewReference != null && mViewReference.get() != null) {
+//
+//            if (!mViewReference.get().hasConnection()) {
+//                mViewReference.get().showNotConnected();
+//                return;
+//            }
+//
+//            mViewReference.get().showLoading(true);
+//
+//            transactionsRepo.getHistory(day, new HistoryCallBack() {
+//                @Override
+//                public void onSuccess(List<Transaction> transactions) {
+//                    if (mViewReference != null && mViewReference.get() != null) {
+//                        mViewReference.get().showLoading(false);
+//                        mViewReference.get().showTransactionsHistory(transactions);
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure() {
+//                    if (mViewReference != null && mViewReference.get() != null) {
+//                        mViewReference.get().showLoading(false);
+//                        mViewReference.get().showNoData(true, R.string.no_data);
+//                    }
+//                }
+//            });
+
+//        }
+    }
+
+    @Override
+    public void validate(String userId, Double amount) {
         if (mViewReference != null && mViewReference.get() != null) {
 
             if (!mViewReference.get().hasConnection()) {
@@ -26,22 +61,31 @@ public class MerchantPresenter implements MerchantContract.Presenter {
                 return;
             }
 
+            mViewReference.get().clearError();
             mViewReference.get().showLoading(true);
 
-            transactionsRepo.getHistory(day, new HistoryCallBack() {
+            transactionsRepo.requestPayment(userId, amount, new RequestPaymentCallBack() {
                 @Override
-                public void onSuccess(List<Transaction> transactions) {
+                public void onSuccess() {
                     if (mViewReference != null && mViewReference.get() != null) {
                         mViewReference.get().showLoading(false);
-                        mViewReference.get().showTransactionsHistory(transactions);
+                        mViewReference.get().showValidationSuccess();
                     }
                 }
 
                 @Override
-                public void onFailure() {
+                public void onFailure(String error) {
                     if (mViewReference != null && mViewReference.get() != null) {
                         mViewReference.get().showLoading(false);
-                        mViewReference.get().showNoData(true, R.string.no_data);
+                        mViewReference.get().showError(true, error);
+                    }
+                }
+
+                @Override
+                public void onFailure(@StringRes int error) {
+                    if (mViewReference != null && mViewReference.get() != null) {
+                        mViewReference.get().showLoading(false);
+                        mViewReference.get().showError(true, error);
                     }
                 }
             });

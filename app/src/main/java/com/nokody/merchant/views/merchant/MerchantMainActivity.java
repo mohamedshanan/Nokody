@@ -6,8 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nokody.merchant.R;
+import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.data.models.Transaction;
 import com.nokody.merchant.utils.Constants;
@@ -18,9 +23,23 @@ import org.parceler.Parcels;
 import java.util.List;
 import java.util.Map;
 
-public class MerchantMainActivity extends AppCompatActivity implements MerchantContract.View {
+import butterknife.BindView;
 
+public class MerchantMainActivity extends BaseActivity implements MerchantContract.View {
 
+    @Nullable
+    @BindView(R.id.etId)
+    EditText etId;
+    @Nullable
+    @BindView(R.id.etPassword)
+    EditText etPassword;
+    @Nullable
+    @BindView(R.id.tvError)
+    TextView tvError;
+    @Nullable
+    @BindView(R.id.btnLogin)
+    Button btnLogin;
+    
     private LoginResponse loginResponse;
     private MerchantContract.Presenter presenter;
 
@@ -32,48 +51,54 @@ public class MerchantMainActivity extends AppCompatActivity implements MerchantC
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_merchant_main);
-        presenter = new MerchantPresenter();
-        presenter.attachView(this);
-        presenter.getTransactions("today");
-
+    protected int getActivityView() {
+        return R.layout.activity_merchant_main;
     }
 
-//    @Override
-//    protected int getActivityView() {
-//        return R.layout.activity_merchant_main;
-//    }
-//
-//    @Override
-//    protected int getToolbarTitleResource() {
-//        return R.string.home;
-//    }
-//
-//    @Override
-//    protected boolean isHomeAsUpEnabled() {
-//        return true;
-//    }
-//
-//    @Override
-//    protected void afterInflation(Bundle savedInstance) {
-//
-//    }
+    @Override
+    protected int getToolbarTitleResource() {
+        return R.string.home;
+    }
+
+    @Override
+    protected boolean isHomeAsUpEnabled() {
+        return false;
+    }
+
+    @Override
+    protected void afterInflation(Bundle savedInstance) {
+        presenter = new MerchantPresenter();
+        presenter.attachView(this);
+    }
 
     @Override
     public void showLoading(boolean show) {
-//        setLoading(show);
+        setLoading(show);
     }
 
     @Override
-    public void showNoData(boolean show, int strId) {
-//        showNoData(show, R.string.no_data);
+    public void showError(boolean show, int strId) {
+        if (show) {
+            tvError.setText(getString(strId));
+            tvError.setVisibility(View.VISIBLE);
+        } else {
+            tvError.setVisibility(View.GONE);
+        }
     }
 
     @Override
-    public void showTransactionsHistory(List<Transaction> transactionsHistory) {
+    public void showError(boolean show, String errorMessage) {
+        if (show) {
+            tvError.setText(errorMessage);
+            tvError.setVisibility(View.VISIBLE);
+        } else {
+            tvError.setVisibility(View.GONE);
+        }
+    }
 
+    @Override
+    public void clearError() {
+        tvError.setVisibility(View.GONE);
     }
 
     @Override
@@ -83,6 +108,11 @@ public class MerchantMainActivity extends AppCompatActivity implements MerchantC
 
     @Override
     public void showNotConnected() {
-//        showNoConnection();
+        showNoConnection();
+    }
+
+    @Override
+    public void showValidationSuccess() {
+
     }
 }

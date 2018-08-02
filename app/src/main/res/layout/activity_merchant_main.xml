@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="20dp">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:text="@string/amount"
+        android:layout_marginBottom="-16dp"
+        android:textColor="@color/textSecondary" />
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_transparent">
+        android:layout_marginBottom="8dp">
 
         <EditText
             android:id="@+id/etAmount"
@@ -18,10 +26,9 @@
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
             android:gravity="left"
-            android:hint="@string/user_name"
+            android:hint="@string/enter_purchase_amount"
             android:imeOptions="actionNext"
             android:inputType="numberDecimal"
-            android:padding="8dp"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/textSecondary" />
 
@@ -29,48 +36,52 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:gravity="left"
-            android:hint="@string/password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/textSecondary" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tvError"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/invalid_credentials"
-        android:textColor="@color/red"
-        android:visibility="gone" />
+        android:background="@drawable/rounded_transparent">
 
-    <TextView
-        android:id="@+id/tvForgetPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/forget_password" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etPassport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="8dp"
+                android:gravity="left"
+                android:hint="@string/enter_passport_number"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/textSecondary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:text="@string/or"
+                android:textAlignment="center"
+                android:textColor="@color/grey"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/scan"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_scan" />
+
+        </LinearLayout>
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/validateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -78,28 +89,8 @@
         android:background="@drawable/rounded_accent"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/login"
-        android:textAllCaps="false"
+        android:text="@string/next"
         android:textColor="@color/white" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/dont_have_account"
-        android:textColor="@color/textSecondary" />
-
-    <TextView
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
-        android:text="@string/register"
-        android:textAllCaps="true"
-        android:textColor="@color/textSecondary" />
-
 </LinearLayout>
+
