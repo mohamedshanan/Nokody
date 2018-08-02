@@ -23,7 +23,7 @@ public interface WebServices {
     Call<HistoryResponse> getHistory(@Query("day") String day);
 
     @GET("account/validate/{userId}/{amount}")
-    Call<String> requestPayment(@Path("userID") String userId, @Path("amount") Double amount);
+    Call<String> requestPayment(@Path("userId") String userId, @Path("amount") Double amount);
 
 
 }

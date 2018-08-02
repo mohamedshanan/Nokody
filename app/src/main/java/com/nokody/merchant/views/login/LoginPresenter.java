@@ -29,13 +29,14 @@ public class LoginPresenter implements LoginContract.Presenter {
         if (TextUtils.isEmpty(username)) {
             mViewReference.get().showEmailError(true, R.string.error_field_required);
             cancel = true;
-        } else if (username.length() < 4) {
-            mViewReference.get().showEmailError(true, R.string.error_invalid_id);
-            cancel = true;
         }
+//        else if (username.length()) {
+//            mViewReference.get().showEmailError(true, R.string.error_invalid_id);
+//            cancel = true;
+//        }
 
         // Check for a valid password, if the user entered one.
-        if (TextUtils.isEmpty(password) || password.length() < 4) {
+        if (TextUtils.isEmpty(password)) {
             mViewReference.get().showPasswordError(true, R.string.error_invalid_password);
             cancel = true;
         }

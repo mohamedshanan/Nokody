@@ -6,39 +6,38 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.LoginResponse;
-import com.nokody.merchant.data.models.Transaction;
-import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
-
-import org.parceler.Parcels;
-
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 
 public class MerchantMainActivity extends BaseActivity implements MerchantContract.View {
 
     @Nullable
-    @BindView(R.id.etId)
-    EditText etId;
+    @BindView(R.id.etAmount)
+    EditText etAmount;
     @Nullable
-    @BindView(R.id.etPassword)
-    EditText etPassword;
+    @BindView(R.id.etPassport)
+    EditText etPassport;
     @Nullable
-    @BindView(R.id.tvError)
-    TextView tvError;
+    @BindView(R.id.scan)
+    ImageView scan;
     @Nullable
-    @BindView(R.id.btnLogin)
-    Button btnLogin;
+    @BindView(R.id.tvValidateError)
+    TextView tvValidateError;
+    @Nullable
+    @BindView(R.id.validateBtn)
+    Button validateBtn;
     
     private LoginResponse loginResponse;
     private MerchantContract.Presenter presenter;
@@ -69,6 +68,22 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     protected void afterInflation(Bundle savedInstance) {
         presenter = new MerchantPresenter();
         presenter.attachView(this);
+        validateBtn.setOnClickListener(v -> {
+
+            if (TextUtils.isEmpty(etAmount.getText().toString())){
+                etAmount.setError(getString(R.string.error_field_required));
+                return;
+            }
+
+            if (TextUtils.isEmpty(etPassport.getText().toString())){
+                etPassport.setError(getString(R.string.error_field_required));
+                return;
+            }
+
+            presenter.validate(etPassport.getText().toString(),
+                    Double.valueOf(etAmount.getText().toString()));
+        });
+
     }
 
     @Override
@@ -79,26 +94,26 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     @Override
     public void showError(boolean show, int strId) {
         if (show) {
-            tvError.setText(getString(strId));
-            tvError.setVisibility(View.VISIBLE);
+            tvValidateError.setText(getString(strId));
+            tvValidateError.setVisibility(View.VISIBLE);
         } else {
-            tvError.setVisibility(View.GONE);
+            tvValidateError.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showError(boolean show, String errorMessage) {
         if (show) {
-            tvError.setText(errorMessage);
-            tvError.setVisibility(View.VISIBLE);
+            tvValidateError.setText(errorMessage);
+            tvValidateError.setVisibility(View.VISIBLE);
         } else {
-            tvError.setVisibility(View.GONE);
+            tvValidateError.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void clearError() {
-        tvError.setVisibility(View.GONE);
+        tvValidateError.setVisibility(View.GONE);
     }
 
     @Override
@@ -113,6 +128,6 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
 
     @Override
     public void showValidationSuccess() {
-
+        Toast.makeText(this, "Validation success", Toast.LENGTH_SHORT).show();
     }
 }

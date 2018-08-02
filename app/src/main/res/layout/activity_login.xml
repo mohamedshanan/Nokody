@@ -12,45 +12,35 @@
         android:layout_marginBottom="40dp"
         android:src="@drawable/ic_payment" />
 
-    <android.support.design.widget.TextInputLayout
+    <EditText
+        android:id="@+id/etId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/rounded_transparent">
+        android:background="@drawable/rounded_transparent"
+        android:drawablePadding="8dp"
+        android:gravity="left"
+        android:hint="@string/user_name"
+        android:imeOptions="actionNext"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/textSecondary" />
 
-        <EditText
-            android:id="@+id/etId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:gravity="left"
-            android:hint="@string/user_name"
-            android:imeOptions="actionNext"
-            android:inputType="textEmailAddress"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/textSecondary" />
-
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
+    <EditText
+        android:id="@+id/etPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:gravity="left"
-            android:hint="@string/password"
-            android:imeOptions="actionDone"
-            android:inputType="textPassword"
-            android:padding="8dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:textColorHint="@color/textSecondary" />
-
-    </android.support.design.widget.TextInputLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rounded_transparent"
+        android:drawablePadding="8dp"
+        android:gravity="left"
+        android:hint="@string/password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:padding="8dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/textSecondary" />
 
     <TextView
         android:id="@+id/tvError"

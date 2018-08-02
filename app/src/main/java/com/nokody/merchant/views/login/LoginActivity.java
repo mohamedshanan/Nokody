@@ -110,14 +110,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void goToMerchant(LoginResponse loginResponse) {
-        showSnackBar("Merchant");
-
+        mNavigator.merchantHome(loginResponse);
         finish();
     }
 
     @Override
     public void goToCustomer(LoginResponse loginResponse) {
-//        showSnackBar("Customer");
         mNavigator.customerHome(loginResponse.getBalance());
         finish();
     }
