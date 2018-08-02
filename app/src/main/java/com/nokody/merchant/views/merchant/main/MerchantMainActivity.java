@@ -2,24 +2,27 @@ package com.nokody.merchant.views.merchant.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
+import com.nokody.merchant.views.reader.ReaderActivity;
 
 import butterknife.BindView;
+
+import static com.nokody.merchant.utils.Constants.ENCODED_TEXT;
+import static com.nokody.merchant.utils.Constants.QR_READER_CODE;
 
 public class MerchantMainActivity extends BaseActivity implements MerchantContract.View {
 
@@ -38,7 +41,7 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     @Nullable
     @BindView(R.id.validateBtn)
     Button validateBtn;
-    
+
     private LoginResponse loginResponse;
     private MerchantContract.Presenter presenter;
     private String customerId;
@@ -70,14 +73,20 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     protected void afterInflation(Bundle savedInstance) {
         presenter = new MerchantPresenter();
         presenter.attachView(this);
+
+        scan.setOnClickListener(v -> {
+            startActivityForResult(new Intent(this, ReaderActivity.class)
+                    , QR_READER_CODE);
+        });
+
         validateBtn.setOnClickListener(v -> {
 
-            if (TextUtils.isEmpty(etAmount.getText().toString())){
+            if (TextUtils.isEmpty(etAmount.getText().toString())) {
                 etAmount.setError(getString(R.string.error_field_required));
                 return;
             }
 
-            if (TextUtils.isEmpty(etPassport.getText().toString())){
+            if (TextUtils.isEmpty(etPassport.getText().toString())) {
                 etPassport.setError(getString(R.string.error_field_required));
                 return;
             }
@@ -135,8 +144,23 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
 
         String myId = getIntent().getStringExtra(Constants.USER_TYPE_SELLER);
 
-        if (customerId != null && myId != null && amount != null){
+        if (customerId != null && myId != null && amount != null) {
             mNavigator.checkout(customerId, myId, amount);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == QR_READER_CODE && resultCode == RESULT_OK && data != null) {
+
+            if (data.getStringExtra(ENCODED_TEXT) != null) {
+                String encodedText = data.getStringExtra(ENCODED_TEXT);
+
+                if (!TextUtils.isEmpty(encodedText)) {
+                    etPassport.setText(encodedText);
+                }
+            }
         }
     }
 }

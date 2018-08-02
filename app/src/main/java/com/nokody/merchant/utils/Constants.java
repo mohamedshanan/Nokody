@@ -6,4 +6,8 @@ public class Constants {
     public static final String FROM_ID = "from_id";
     public static final String TO_ID = "to_id";
     public static final String AMOUNT = "amount";
+    public static final String ENCODED_TEXT = "encoded_text";
+
+
+    public static final int QR_READER_CODE = 1;
 }
