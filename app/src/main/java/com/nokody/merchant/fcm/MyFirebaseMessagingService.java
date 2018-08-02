@@ -8,6 +8,8 @@ import com.google.firebase.messaging.RemoteMessage;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        Log.d("FirebaseMessaging", "From: " + remoteMessage.getFrom());
+
         // Check if message contains a data payload.
         if (remoteMessage.getData() != null || remoteMessage.getNotification() != null) {
             Log.d("FirebaseMessaging", "Message data payload: " + remoteMessage.getData());

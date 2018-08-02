@@ -99,7 +99,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseCont
         showSnackBar(R.string.no_connection);
     }
 
-
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
