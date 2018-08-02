@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -59,6 +61,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     protected void afterInflation(Bundle savedInstance) {
         presenter = new LoginPresenter();
         presenter.attachView(this);
+
+        etPassword.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                btnLogin.performClick();
+                return true;
+            }
+            return false;
+        });
 
         btnLogin.setOnClickListener(v -> {
             presenter.login(etId.getText().toString(), etPassword.getText().toString());

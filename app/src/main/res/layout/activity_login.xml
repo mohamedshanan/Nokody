@@ -36,7 +36,7 @@
         android:drawablePadding="8dp"
         android:gravity="left"
         android:hint="@string/password"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionGo"
         android:inputType="textPassword"
         android:padding="8dp"
         android:textColor="@color/colorPrimaryDark"

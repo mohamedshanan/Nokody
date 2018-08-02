@@ -71,7 +71,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                 @Override
                 public void onSuccess(LoginResponse loginResponse) {
                     if (mViewReference.get() != null) {
-                        mViewReference.get().showLoading(false);
                         if (loginResponse != null && loginResponse.getUser() != null) {
 
                             updateFMCToken(loginResponse.getId());
@@ -81,6 +80,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                             } else {
                                 mViewReference.get().goToMerchant(loginResponse);
                             }
+                            mViewReference.get().showLoading(false);
                         } else {
                             onFailure();
                         }

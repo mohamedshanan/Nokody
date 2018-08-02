@@ -64,16 +64,16 @@ public class MerchantPresenter implements MerchantContract.Presenter {
                 @Override
                 public void onSuccess() {
                     if (mViewReference != null && mViewReference.get() != null) {
-                        mViewReference.get().showLoading(false);
                         mViewReference.get().showValidationSuccess();
+                        mViewReference.get().showLoading(false);
                     }
                 }
 
                 @Override
                 public void onFailure(String error) {
                     if (mViewReference != null && mViewReference.get() != null) {
-                        mViewReference.get().showLoading(false);
                         mViewReference.get().showError(true, error);
+                        mViewReference.get().showLoading(false);
                     }
                 }
 
