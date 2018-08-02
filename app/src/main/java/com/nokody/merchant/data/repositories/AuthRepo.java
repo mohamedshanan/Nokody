@@ -2,6 +2,7 @@ package com.nokody.merchant.data.repositories;
 
 import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
+import com.nokody.merchant.data.models.TokenUpdateBody;
 import com.nokody.merchant.data.models.callbacks.LoginCallBack;
 import com.nokody.merchant.data.rest.ServiceGenerator;
 import com.nokody.merchant.data.rest.WebServices;
@@ -31,6 +32,26 @@ public class AuthRepo {
     public void login(LoginData loginData, LoginCallBack loginCallBack) {
 
         apiEndPointInterface.login(loginData)
+                .enqueue(new Callback<LoginResponse>() {
+                    @Override
+                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                        if (response != null && response.isSuccessful()){
+                            loginCallBack.onSuccess(response.body());
+                        } else {
+                            loginCallBack.onFailure();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                        loginCallBack.onFailure();
+                    }
+                });
+    }
+
+    public void updateToken(TokenUpdateBody tokenUpdateBody, LoginCallBack loginCallBack) {
+
+        apiEndPointInterface.updateFCMToken(tokenUpdateBody)
                 .enqueue(new Callback<LoginResponse>() {
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {

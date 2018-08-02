@@ -5,6 +5,7 @@ import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.data.models.PaymentBody;
 import com.nokody.merchant.data.models.PaymentResponse;
+import com.nokody.merchant.data.models.TokenUpdateBody;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -17,6 +18,9 @@ public interface WebServices {
 
     @POST("user/authenticate")
     Call<LoginResponse> login(@Body LoginData loginData);
+
+    @POST("user/updateDeviceId")
+    Call<LoginResponse> updateFCMToken(@Body TokenUpdateBody tokenUpdateBody);
 
     @POST("transactions/history")
     Call<HistoryResponse> getHistory(@Query("day") String day);

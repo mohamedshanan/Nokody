@@ -10,4 +10,6 @@ public class Constants {
 
 
     public static final int QR_READER_CODE = 1;
+    public static final String USER_ID = "user_id";
+    public static final String USER_PASSPORT = "user_passport";
 }

@@ -2,9 +2,11 @@ package com.nokody.merchant.views.login;
 
 import android.text.TextUtils;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.nokody.merchant.R;
 import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
+import com.nokody.merchant.data.models.TokenUpdateBody;
 import com.nokody.merchant.data.models.callbacks.LoginCallBack;
 import com.nokody.merchant.data.repositories.AuthRepo;
 
@@ -71,6 +73,9 @@ public class LoginPresenter implements LoginContract.Presenter {
                     if (mViewReference.get() != null) {
                         mViewReference.get().showLoading(false);
                         if (loginResponse != null && loginResponse.getUser() != null) {
+
+                            updateFMCToken(loginResponse.getId());
+
                             if (loginResponse.getUser().getUserTypeId() == 1) {
                                 mViewReference.get().goToCustomer(loginResponse);
                             } else {
@@ -91,7 +96,29 @@ public class LoginPresenter implements LoginContract.Presenter {
                 }
             });
         }
+    }
 
+    private void updateFMCToken(Integer id) {
+
+        if (!mViewReference.get().hasConnection()) {
+            mViewReference.get().showNotConnected();
+            return;
+        }
+
+        TokenUpdateBody tokenUpdateBody = new TokenUpdateBody(id,
+                FirebaseInstanceId.getInstance().getToken());
+
+        authRepo.updateToken(tokenUpdateBody, new LoginCallBack() {
+            @Override
+            public void onSuccess(LoginResponse loginResponse) {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
     }
 
     @Override
