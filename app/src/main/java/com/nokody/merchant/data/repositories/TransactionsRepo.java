@@ -10,6 +10,8 @@ import com.nokody.merchant.data.models.callbacks.RequestPaymentCallBack;
 import com.nokody.merchant.data.rest.ServiceGenerator;
 import com.nokody.merchant.data.rest.WebServices;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,13 +64,41 @@ public class TransactionsRepo {
                         if (response != null && response.isSuccessful()){
                             requestPaymentCallBack.onSuccess();
                         } else {
-                            requestPaymentCallBack.onFailure(response.message());
+                            try {
+                                requestPaymentCallBack.onFailure(response.errorBody().string());
+                            } catch (IOException e) {
+                                requestPaymentCallBack.onFailure(response.message());
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         requestPaymentCallBack.onFailure(R.string.req_payment_error);
+                    }
+                });
+    }
+
+    public void checkout(String fromId, String toId,Double amount , RequestPaymentCallBack requestPaymentCallBack) {
+
+        apiEndPointInterface.checkout(fromId, toId, amount)
+                .enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        if (response != null && response.isSuccessful()){
+                            requestPaymentCallBack.onSuccess();
+                        } else {
+                            try {
+                                requestPaymentCallBack.onFailure(response.errorBody().string());
+                            } catch (IOException e) {
+                                requestPaymentCallBack.onFailure(response.message());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        requestPaymentCallBack.onFailure(R.string.error);
                     }
                 });
     }

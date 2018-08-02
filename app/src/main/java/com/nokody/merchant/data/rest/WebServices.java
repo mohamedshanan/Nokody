@@ -25,5 +25,10 @@ public interface WebServices {
     @GET("account/validate/{userId}/{amount}")
     Call<String> requestPayment(@Path("userId") String userId, @Path("amount") Double amount);
 
+    @GET("transaction/{fromId}/{toId}/{amount}")
+    Call<String> checkout(@Path("fromId") String fromId,
+                          @Path("toId") String toId,
+                          @Path("amount") Double amount);
+
 
 }
