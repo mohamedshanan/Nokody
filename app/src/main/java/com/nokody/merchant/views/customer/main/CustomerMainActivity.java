@@ -22,7 +22,6 @@ public class CustomerMainActivity extends BaseActivity {
     @Nullable
     public static Intent buildIntent(@NonNull Context context, Double balance) {
         Intent intent = new Intent(context, CustomerMainActivity.class);
-//        intent.putExtra(Constants.USER_TYPE_CUSTOMER, Parcels.wrap(loginResponse));
         intent.putExtra(Constants.USER_TYPE_CUSTOMER, balance);
         return intent;
     }

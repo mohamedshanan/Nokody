@@ -29,19 +29,19 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.login.LoginActivity" />
-        <activity android:name=".views.merchant.main.MerchantMainActivity"/>
-        <activity android:name=".views.customer.main.CustomerMainActivity"/>
+        <activity android:name=".views.merchant.main.MerchantMainActivity" />
+        <activity android:name=".views.customer.main.CustomerMainActivity" />
+        <activity android:name=".views.merchant.checkout.main.CheckoutActivity" />
 
-        <service
-            android:name=".fcm.MyFirebaseMessagingService">
+        <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <service android:name=".fcm.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 

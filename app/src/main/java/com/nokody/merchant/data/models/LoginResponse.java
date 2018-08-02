@@ -10,6 +10,8 @@ public class LoginResponse {
     private Double balance;
     private Boolean isActive;
     private String openedDate;
+    private String passportNumber;
+    private String braceletNumber;
     private User user;
 
     public Integer getId() {
@@ -58,5 +60,21 @@ public class LoginResponse {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
+    public String getBraceletNumber() {
+        return braceletNumber;
+    }
+
+    public void setBraceletNumber(String braceletNumber) {
+        this.braceletNumber = braceletNumber;
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.LoginResponse;
+import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
 
 import butterknife.BindView;
@@ -40,11 +41,13 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     
     private LoginResponse loginResponse;
     private MerchantContract.Presenter presenter;
+    private String customerId;
+    private Double amount;
 
     @Nullable
-    public static Intent buildIntent(@NonNull Context context, LoginResponse loginResponse) {
+    public static Intent buildIntent(@NonNull Context context, String userPassport) {
         Intent intent = new Intent(context, MerchantMainActivity.class);
-//        intent.putExtra(Constants.USER_TYPE_SELLER, Parcels.wrap(loginResponse));
+        intent.putExtra(Constants.USER_TYPE_SELLER, userPassport);
         return intent;
     }
 
@@ -79,8 +82,10 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
                 return;
             }
 
-            presenter.validate(etPassport.getText().toString(),
-                    Double.valueOf(etAmount.getText().toString()));
+            customerId = etPassport.getText().toString();
+            amount = Double.valueOf(etAmount.getText().toString());
+
+            presenter.validate(customerId, amount);
         });
 
     }
@@ -127,6 +132,11 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
 
     @Override
     public void showValidationSuccess() {
-        Toast.makeText(this, "Validation success", Toast.LENGTH_SHORT).show();
+
+        String myId = getIntent().getStringExtra(Constants.USER_TYPE_SELLER);
+
+        if (customerId != null && myId != null && amount != null){
+            mNavigator.checkout(customerId, myId, amount);
+        }
     }
 }

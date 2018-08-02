@@ -1,11 +1,10 @@
 package com.nokody.merchant.data.rest;
 
-import android.support.annotation.StringRes;
-
 import com.nokody.merchant.data.models.HistoryResponse;
 import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
-import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
+import com.nokody.merchant.data.models.PaymentBody;
+import com.nokody.merchant.data.models.PaymentResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -25,10 +24,8 @@ public interface WebServices {
     @GET("account/validate/{userId}/{amount}")
     Call<String> requestPayment(@Path("userId") String userId, @Path("amount") Double amount);
 
-    @GET("transaction/{fromId}/{toId}/{amount}")
-    Call<String> checkout(@Path("fromId") String fromId,
-                          @Path("toId") String toId,
-                          @Path("amount") Double amount);
+    @POST("transaction")
+    Call<PaymentResponse> checkout(@Body PaymentBody paymentBody);
 
 
 }

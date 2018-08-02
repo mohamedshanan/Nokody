@@ -110,7 +110,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void goToMerchant(LoginResponse loginResponse) {
-        mNavigator.merchantHome(loginResponse);
+        if (loginResponse.getPassportNumber() != null){
+            mNavigator.merchantHome(loginResponse.getPassportNumber());
+        } else if (loginResponse.getBraceletNumber() != null){
+            mNavigator.merchantHome(loginResponse.getBraceletNumber());
+        }
+
         finish();
     }
 

@@ -25,4 +25,6 @@
     <string name="enter_pin_code">Enter your pin code</string>
     <string name="make_payment">Make Payment</string>
     <string name="error">Error</string>
+    <string name="payment">Payment</string>
+    <string name="invalid_pin_code">Invalid Pin Code</string>
 </resources>

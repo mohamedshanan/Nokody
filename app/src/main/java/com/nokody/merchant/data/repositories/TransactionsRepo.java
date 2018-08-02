@@ -2,10 +2,9 @@ package com.nokody.merchant.data.repositories;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.data.models.HistoryResponse;
-import com.nokody.merchant.data.models.LoginData;
-import com.nokody.merchant.data.models.LoginResponse;
+import com.nokody.merchant.data.models.PaymentBody;
+import com.nokody.merchant.data.models.PaymentResponse;
 import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
-import com.nokody.merchant.data.models.callbacks.LoginCallBack;
 import com.nokody.merchant.data.models.callbacks.RequestPaymentCallBack;
 import com.nokody.merchant.data.rest.ServiceGenerator;
 import com.nokody.merchant.data.rest.WebServices;
@@ -79,12 +78,12 @@ public class TransactionsRepo {
                 });
     }
 
-    public void checkout(String fromId, String toId,Double amount , RequestPaymentCallBack requestPaymentCallBack) {
+    public void checkout(PaymentBody paymentBody, RequestPaymentCallBack requestPaymentCallBack) {
 
-        apiEndPointInterface.checkout(fromId, toId, amount)
-                .enqueue(new Callback<String>() {
+        apiEndPointInterface.checkout(paymentBody)
+                .enqueue(new Callback<PaymentResponse>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
                         if (response != null && response.isSuccessful()){
                             requestPaymentCallBack.onSuccess();
                         } else {
@@ -97,8 +96,8 @@ public class TransactionsRepo {
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        requestPaymentCallBack.onFailure(R.string.error);
+                    public void onFailure(Call<PaymentResponse> call, Throwable t) {
+                            requestPaymentCallBack.onFailure(R.string.error);
                     }
                 });
     }

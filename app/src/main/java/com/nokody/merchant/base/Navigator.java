@@ -5,6 +5,7 @@ import android.content.Context;
 import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.views.customer.main.CustomerMainActivity;
 import com.nokody.merchant.views.login.LoginActivity;
+import com.nokody.merchant.views.merchant.checkout.main.CheckoutActivity;
 import com.nokody.merchant.views.merchant.main.MerchantMainActivity;
 
 public class Navigator {
@@ -27,9 +28,15 @@ public class Navigator {
         }
     }
 
-    public void merchantHome(LoginResponse loginResponse) {
+    public void merchantHome(String userId) {
         if (mContext != null){
-            mContext.startActivity(MerchantMainActivity.buildIntent(mContext, loginResponse));
+            mContext.startActivity(MerchantMainActivity.buildIntent(mContext, userId));
+        }
+    }
+
+    public void checkout(String fromId, String toId, Double amount) {
+        if (mContext != null){
+            mContext.startActivity(CheckoutActivity.buildIntent(mContext, fromId, toId, amount));
         }
     }
 }
