@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "588827966139",
+    "firebase_url": "https://nokody-81aa2.firebaseio.com",
+    "project_id": "nokody-81aa2",
+    "storage_bucket": "nokody-81aa2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588827966139:android:918feff74c143aee",
+        "android_client_info": {
+          "package_name": "com.nokody.merchant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588827966139-b8i9ta1ltjovs0j7rfk97kbdfdn5rbqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDaRY17BAFWZo4hmTB6YHqa_6x-fJ4tks"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588827966139:android:50db2bd29c8d8b70",
+        "android_client_info": {
+          "package_name": "com.noqody.nokody"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588827966139-lnjj0nbleuh73alffs54nlm6jpmnn9bc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.noqody.nokody",
+            "certificate_hash": "032b2835d9cb6d18014b49e520df9791f6fbbdad"
+          }
+        },
+        {
+          "client_id": "588827966139-b8i9ta1ltjovs0j7rfk97kbdfdn5rbqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDaRY17BAFWZo4hmTB6YHqa_6x-fJ4tks"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588827966139-b8i9ta1ltjovs0j7rfk97kbdfdn5rbqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

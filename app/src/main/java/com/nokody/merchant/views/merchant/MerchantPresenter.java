@@ -1,0 +1,56 @@
+package com.nokody.merchant.views.merchant;
+
+import com.nokody.merchant.R;
+import com.nokody.merchant.data.models.Transaction;
+import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
+import com.nokody.merchant.data.repositories.TransactionsRepo;
+
+import java.lang.ref.WeakReference;
+import java.util.List;
+
+public class MerchantPresenter implements MerchantContract.Presenter {
+
+    private TransactionsRepo transactionsRepo;
+    private WeakReference<MerchantContract.View> mViewReference;
+
+    MerchantPresenter() {
+        transactionsRepo = TransactionsRepo.getInstance();
+    }
+
+    @Override
+    public void getTransactions(String day) {
+        if (mViewReference != null && mViewReference.get() != null) {
+
+            if (!mViewReference.get().hasConnection()) {
+                mViewReference.get().showNotConnected();
+                return;
+            }
+
+            mViewReference.get().showLoading(true);
+
+            transactionsRepo.getHistory(day, new HistoryCallBack() {
+                @Override
+                public void onSuccess(List<Transaction> transactions) {
+                    if (mViewReference != null && mViewReference.get() != null) {
+                        mViewReference.get().showLoading(false);
+                        mViewReference.get().showTransactionsHistory(transactions);
+                    }
+                }
+
+                @Override
+                public void onFailure() {
+                    if (mViewReference != null && mViewReference.get() != null) {
+                        mViewReference.get().showLoading(false);
+                        mViewReference.get().showNoData(true, R.string.no_data);
+                    }
+                }
+            });
+
+        }
+    }
+
+    @Override
+    public void attachView(MerchantContract.View view) {
+        mViewReference = new WeakReference<>(view);
+    }
+}
