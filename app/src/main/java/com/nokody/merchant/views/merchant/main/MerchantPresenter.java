@@ -1,15 +1,11 @@
-package com.nokody.merchant.views.merchant;
+package com.nokody.merchant.views.merchant.main;
 
 import android.support.annotation.StringRes;
 
-import com.nokody.merchant.R;
-import com.nokody.merchant.data.models.Transaction;
-import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
 import com.nokody.merchant.data.models.callbacks.RequestPaymentCallBack;
 import com.nokody.merchant.data.repositories.TransactionsRepo;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 public class MerchantPresenter implements MerchantContract.Presenter {
 

@@ -29,8 +29,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".views.login.LoginActivity" />
-        <activity android:name=".views.merchant.MerchantMainActivity"/>
-        <activity android:name=".views.customer.CustomerMainActivity"/>
+        <activity android:name=".views.merchant.main.MerchantMainActivity"/>
+        <activity android:name=".views.customer.main.CustomerMainActivity"/>
 
         <service
             android:name=".fcm.MyFirebaseMessagingService">

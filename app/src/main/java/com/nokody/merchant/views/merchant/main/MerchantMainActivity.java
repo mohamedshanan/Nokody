@@ -1,10 +1,9 @@
-package com.nokody.merchant.views.merchant;
+package com.nokody.merchant.views.merchant.main;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;

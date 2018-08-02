@@ -3,10 +3,9 @@ package com.nokody.merchant.base;
 import android.content.Context;
 
 import com.nokody.merchant.data.models.LoginResponse;
-import com.nokody.merchant.views.customer.CustomerMainActivity;
+import com.nokody.merchant.views.customer.main.CustomerMainActivity;
 import com.nokody.merchant.views.login.LoginActivity;
-import com.nokody.merchant.views.merchant.MerchantMainActivity;
-import com.nokody.merchant.views.splash.SplashActivity;
+import com.nokody.merchant.views.merchant.main.MerchantMainActivity;
 
 public class Navigator {
 

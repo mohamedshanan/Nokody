@@ -1,4 +1,4 @@
-package com.nokody.merchant.views.customer;
+package com.nokody.merchant.views.customer.main;
 
 
 import android.support.annotation.StringRes;

@@ -1,11 +1,7 @@
-package com.nokody.merchant.views.merchant;
+package com.nokody.merchant.views.merchant.main;
 
 
 import android.support.annotation.StringRes;
-
-import com.nokody.merchant.data.models.Transaction;
-
-import java.util.List;
 
 public class MerchantContract {
 
