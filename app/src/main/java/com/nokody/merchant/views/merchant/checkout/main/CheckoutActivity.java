@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.infideap.blockedittext.BlockEditText;
 import com.nokody.merchant.R;
@@ -17,6 +16,7 @@ import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.PaymentBody;
 import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
+import com.nokody.merchant.views.merchant.checkout.SuccessActivity;
 
 import butterknife.BindView;
 
@@ -129,6 +129,7 @@ public class CheckoutActivity extends BaseActivity implements CheckoutContract.V
 
     @Override
     public void showTransactionSuccess() {
-        Toast.makeText(this, "Transaction success", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, SuccessActivity.class));
+        finish();
     }
 }

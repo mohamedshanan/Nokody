@@ -10,6 +10,7 @@ import com.nokody.merchant.data.rest.ServiceGenerator;
 import com.nokody.merchant.data.rest.WebServices;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -90,7 +91,9 @@ public class TransactionsRepo {
                     @Override
                     public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
                         if (response != null && response.isSuccessful()) {
-                            historyCallback.onSuccess(response.body());
+                            List<Transaction> transactionList = response.body();
+                            Collections.reverse(transactionList);
+                            historyCallback.onSuccess(transactionList);
                         } else {
                             historyCallback.onFailure();
                         }

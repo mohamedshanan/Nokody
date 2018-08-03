@@ -10,15 +10,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.PaymentBody;
 import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
+import com.nokody.merchant.views.merchant.checkout.SuccessActivity;
+import com.nokody.merchant.views.merchant.checkout.main.CheckoutActivity;
 import com.nokody.merchant.views.reader.ReaderActivity;
 
 import butterknife.BindView;
@@ -81,8 +81,8 @@ public class TransferActivity extends BaseActivity implements TransferContract.V
             final int DRAWABLE_RIGHT = 2;
             final int DRAWABLE_BOTTOM = 3;
 
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (etPassport.getRight() - etPassport.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (etPassport.getRight() - etPassport.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                     startActivityForResult(new Intent(this, ReaderActivity.class)
                             , QR_READER_CODE);
                     return true;
@@ -162,7 +162,8 @@ public class TransferActivity extends BaseActivity implements TransferContract.V
 
     @Override
     public void showTransactionSuccess() {
-        Toast.makeText(this, "Transaction success", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, SuccessActivity.class));
+        finish();
     }
 
     @Override
