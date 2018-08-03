@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +44,6 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     @BindView(R.id.validateBtn)
     Button validateBtn;
 
-    private LoginResponse loginResponse;
     private MerchantContract.Presenter presenter;
     private String customerId;
     private Double amount;
@@ -52,6 +53,22 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
         Intent intent = new Intent(context, MerchantMainActivity.class);
         intent.putExtra(Constants.USER_TYPE_SELLER, userPassport);
         return intent;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.merchant_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_history){
+            mNavigator.history();
+        } else if (item.getItemId() == R.id.action_transfer){
+
+        }
+        return true;
     }
 
     @Override

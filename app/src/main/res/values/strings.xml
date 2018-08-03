@@ -28,4 +28,7 @@
     <string name="payment">Payment</string>
     <string name="invalid_pin_code">Invalid Pin Code</string>
     <string name="reader">Reader</string>
+    <string name="transfer">transfer</string>
+    <string name="history">Transactions History</string>
+    <string name="reload">Reload</string>
 </resources>

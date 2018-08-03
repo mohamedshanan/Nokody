@@ -1,15 +1,16 @@
 package com.nokody.merchant.data.repositories;
 
 import com.nokody.merchant.R;
-import com.nokody.merchant.data.models.HistoryResponse;
 import com.nokody.merchant.data.models.PaymentBody;
 import com.nokody.merchant.data.models.PaymentResponse;
+import com.nokody.merchant.data.models.Transaction;
 import com.nokody.merchant.data.models.callbacks.HistoryCallBack;
 import com.nokody.merchant.data.models.callbacks.RequestPaymentCallBack;
 import com.nokody.merchant.data.rest.ServiceGenerator;
 import com.nokody.merchant.data.rest.WebServices;
 
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,33 +35,13 @@ public class TransactionsRepo {
         return instance;
     }
 
-    public void getHistory(String day, HistoryCallBack historyCallBack) {
-
-        apiEndPointInterface.getHistory(day)
-                .enqueue(new Callback<HistoryResponse>() {
-                    @Override
-                    public void onResponse(Call<HistoryResponse> call, Response<HistoryResponse> response) {
-                        if (response != null && response.isSuccessful()){
-                            historyCallBack.onSuccess(response.body().getTransactions());
-                        } else {
-                            historyCallBack.onFailure();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<HistoryResponse> call, Throwable t) {
-                        historyCallBack.onFailure();
-                    }
-                });
-    }
-
-    public void requestPayment(String userId, Double amount , RequestPaymentCallBack requestPaymentCallBack) {
+    public void requestPayment(String userId, Double amount, RequestPaymentCallBack requestPaymentCallBack) {
 
         apiEndPointInterface.requestPayment(userId, amount)
                 .enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        if (response != null && response.isSuccessful()){
+                        if (response != null && response.isSuccessful()) {
                             requestPaymentCallBack.onSuccess();
                         } else {
                             try {
@@ -84,7 +65,7 @@ public class TransactionsRepo {
                 .enqueue(new Callback<PaymentResponse>() {
                     @Override
                     public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
-                        if (response != null && response.isSuccessful()){
+                        if (response != null && response.isSuccessful()) {
                             requestPaymentCallBack.onSuccess();
                         } else {
                             try {
@@ -97,9 +78,29 @@ public class TransactionsRepo {
 
                     @Override
                     public void onFailure(Call<PaymentResponse> call, Throwable t) {
-                            requestPaymentCallBack.onFailure(R.string.error);
+                        requestPaymentCallBack.onFailure(R.string.error);
                     }
                 });
     }
 
+    public void getHistory(Integer accountId, HistoryCallBack historyCallback) {
+
+        apiEndPointInterface.getTransactionHistory(accountId)
+                .enqueue(new Callback<List<Transaction>>() {
+                    @Override
+                    public void onResponse(Call<List<Transaction>> call, Response<List<Transaction>> response) {
+                        if (response != null && response.isSuccessful()) {
+                            historyCallback.onSuccess(response.body());
+                        } else {
+                            historyCallback.onFailure();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Transaction>> call, Throwable t) {
+                        historyCallback.onFailure();
+                    }
+                });
+    }
 }
+

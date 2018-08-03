@@ -52,6 +52,7 @@
             android:resource="@color/colorAccent" />
 
         <activity android:name=".views.reader.ReaderActivity"></activity>
+        <activity android:name=".views.merchant.history.HistoryActivity"></activity>
     </application>
 
 </manifest>

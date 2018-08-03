@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
 import com.nokody.merchant.data.models.LoginResponse;
+import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
 
 import butterknife.BindView;
@@ -120,6 +120,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void goToMerchant(LoginResponse loginResponse) {
+        Utilities.saveIntToPref(Constants.ACCOUNT_ID, loginResponse.getId(), this);
         if (loginResponse.getPassportNumber() != null){
             mNavigator.merchantHome(loginResponse.getPassportNumber());
         } else if (loginResponse.getBraceletNumber() != null){
@@ -131,6 +132,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void goToCustomer(LoginResponse loginResponse) {
+        Utilities.saveIntToPref(Constants.ACCOUNT_ID, loginResponse.getId(), this);
         mNavigator.customerHome(loginResponse.getBalance());
         finish();
     }

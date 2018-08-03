@@ -6,6 +6,7 @@ import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.views.customer.main.CustomerMainActivity;
 import com.nokody.merchant.views.login.LoginActivity;
 import com.nokody.merchant.views.merchant.checkout.main.CheckoutActivity;
+import com.nokody.merchant.views.merchant.history.HistoryActivity;
 import com.nokody.merchant.views.merchant.main.MerchantMainActivity;
 
 public class Navigator {
@@ -37,6 +38,12 @@ public class Navigator {
     public void checkout(String fromId, String toId, Double amount) {
         if (mContext != null){
             mContext.startActivity(CheckoutActivity.buildIntent(mContext, fromId, toId, amount));
+        }
+    }
+
+    public void history() {
+        if (mContext != null){
+            mContext.startActivity(HistoryActivity.buildIntent(mContext));
         }
     }
 }
