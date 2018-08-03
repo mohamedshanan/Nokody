@@ -7,74 +7,59 @@
     android:orientation="vertical"
     android:padding="20dp">
 
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/credits_icon" />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:paddingBottom="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:text="Current credit"
+        android:textColor="@color/textSecondary"
+        android:textSize="16sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
+            android:id="@+id/tvBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:text="Current credit"
-            android:textColor="@color/textSecondary"
-            android:textSize="12sp" />
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            tools:text="1850" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvBalance"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="32sp"
-                tools:text="1850" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="4dp"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
-                android:text="SAR"
-                android:textColor="@color/textSecondary"
-                android:textSize="16sp" />
-
-        </LinearLayout>
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="SAR"
+            android:textColor="@color/textSecondary"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/grey" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="No transactions history found"
-        android:textColor="@color/textSecondary"
-        android:textSize="16sp" />
 
 </LinearLayout>
