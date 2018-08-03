@@ -27,13 +27,9 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void afterInflation(Bundle savedInstance) {
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mNavigator.login();
-                finish();
-
-            }
-        }, 600);
+        handler.postDelayed(() -> {
+            mNavigator.login();
+            finish();
+        }, 700);
     }
 }
