@@ -1,9 +1,11 @@
-package com.nokody.merchant.views.merchant.main;
+package com.nokody.merchant.views.transfer.main;
 
 
 import android.support.annotation.StringRes;
 
-public class MerchantContract {
+import com.nokody.merchant.data.models.PaymentBody;
+
+public class TransferContract {
 
     interface View {
         void showLoading(boolean show);
@@ -12,11 +14,13 @@ public class MerchantContract {
         void clearError();
         boolean hasConnection();
         void showNotConnected();
-        void showValidationSuccess();
+        void showValidationSuccess(String picCode);
+        void showTransactionSuccess();
     }
 
     interface Presenter {
-        void attachView(MerchantContract.View view);
+        void attachView(TransferContract.View view);
         void validate(String userId, Double amount);
+        void checkout(PaymentBody paymentBody);
     }
 }

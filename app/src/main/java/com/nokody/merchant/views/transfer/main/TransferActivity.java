@@ -1,4 +1,4 @@
-package com.nokody.merchant.views.merchant.main;
+package com.nokody.merchant.views.transfer.main;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,16 +6,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
+import com.nokody.merchant.data.models.PaymentBody;
 import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
 import com.nokody.merchant.views.reader.ReaderActivity;
@@ -25,7 +25,7 @@ import butterknife.BindView;
 import static com.nokody.merchant.utils.Constants.ENCODED_TEXT;
 import static com.nokody.merchant.utils.Constants.QR_READER_CODE;
 
-public class MerchantMainActivity extends BaseActivity implements MerchantContract.View {
+public class TransferActivity extends BaseActivity implements TransferContract.View {
 
     @Nullable
     @BindView(R.id.etAmount)
@@ -43,32 +43,16 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     @BindView(R.id.validateBtn)
     Button validateBtn;
 
-    private MerchantContract.Presenter presenter;
-    private String customerId;
+    private TransferContract.Presenter presenter;
+    private String myId;
+    private String recipientId;
     private Double amount;
-    private String myPassport;
 
     @Nullable
     public static Intent buildIntent(@NonNull Context context, String userPassport) {
-        Intent intent = new Intent(context, MerchantMainActivity.class);
+        Intent intent = new Intent(context, TransferActivity.class);
         intent.putExtra(Constants.USER_PASSPORT, userPassport);
         return intent;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_history){
-            mNavigator.history();
-        } else if (item.getItemId() == R.id.action_transfer){
-            mNavigator.transfer(myPassport);
-        }
-        return true;
     }
 
     @Override
@@ -78,20 +62,19 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
 
     @Override
     protected int getToolbarTitleResource() {
-        return R.string.home;
+        return R.string.transfer;
     }
 
     @Override
     protected boolean isHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     protected void afterInflation(Bundle savedInstance) {
-        presenter = new MerchantPresenter();
+        presenter = new TransferPresenter();
         presenter.attachView(this);
-
-        myPassport = getIntent().getStringExtra(Constants.USER_PASSPORT);
+        myId = getIntent().getStringExtra(Constants.USER_PASSPORT);
 
         scan.setOnClickListener(v -> {
             startActivityForResult(new Intent(this, ReaderActivity.class)
@@ -110,10 +93,10 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
                 return;
             }
 
-            customerId = etPassport.getText().toString();
+            recipientId = etPassport.getText().toString();
             amount = Double.valueOf(etAmount.getText().toString());
 
-            presenter.validate(customerId, amount);
+            presenter.validate(myId, amount);
         });
 
     }
@@ -159,11 +142,17 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
     }
 
     @Override
-    public void showValidationSuccess() {
+    public void showValidationSuccess(String pinCode) {
 
-        if (customerId != null && myPassport != null && amount != null) {
-            mNavigator.checkout(customerId, myPassport, amount);
+        if (recipientId != null && myId != null && amount != null) {
+            PaymentBody paymentBody = new PaymentBody(pinCode, myId, recipientId, amount);
+            presenter.checkout(paymentBody);
         }
+    }
+
+    @Override
+    public void showTransactionSuccess() {
+        Toast.makeText(this, "Transaction success", Toast.LENGTH_SHORT).show();
     }
 
     @Override

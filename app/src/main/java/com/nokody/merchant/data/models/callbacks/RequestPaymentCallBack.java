@@ -7,7 +7,7 @@ import com.nokody.merchant.data.models.Transaction;
 import java.util.List;
 
 public interface RequestPaymentCallBack {
-    void onSuccess();
+    void onSuccess(String pinCode);
     void onFailure(String message);
     void onFailure(@StringRes int message);
 }

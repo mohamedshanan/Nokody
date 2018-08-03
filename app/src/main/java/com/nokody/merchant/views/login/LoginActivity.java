@@ -133,7 +133,12 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @Override
     public void goToCustomer(LoginResponse loginResponse) {
         Utilities.saveIntToPref(Constants.ACCOUNT_ID, loginResponse.getId(), this);
-        mNavigator.customerHome(loginResponse.getBalance());
+        if (loginResponse.getPassportNumber() != null){
+            mNavigator.customerHome(loginResponse.getPassportNumber(), loginResponse.getBalance());
+        } else if (loginResponse.getBraceletNumber() != null){
+            mNavigator.customerHome(loginResponse.getBraceletNumber(), loginResponse.getBalance());
+        }
+
         finish();
     }
 

@@ -42,7 +42,7 @@ public class TransactionsRepo {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         if (response != null && response.isSuccessful()) {
-                            requestPaymentCallBack.onSuccess();
+                            requestPaymentCallBack.onSuccess(response.body());
                         } else {
                             try {
                                 requestPaymentCallBack.onFailure(response.errorBody().string());
@@ -66,7 +66,7 @@ public class TransactionsRepo {
                     @Override
                     public void onResponse(Call<PaymentResponse> call, Response<PaymentResponse> response) {
                         if (response != null && response.isSuccessful()) {
-                            requestPaymentCallBack.onSuccess();
+                            requestPaymentCallBack.onSuccess(null);
                         } else {
                             try {
                                 requestPaymentCallBack.onFailure(response.errorBody().string());

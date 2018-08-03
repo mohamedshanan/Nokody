@@ -17,37 +17,6 @@ public class MerchantPresenter implements MerchantContract.Presenter {
     }
 
     @Override
-    public void getTransactions(String day) {
-//        if (mViewReference != null && mViewReference.get() != null) {
-//
-//            if (!mViewReference.get().hasConnection()) {
-//                mViewReference.get().showNotConnected();
-//                return;
-//            }
-//
-//            mViewReference.get().showLoading(true);
-//
-//            transactionsRepo.getHistory(day, new HistoryCallBack() {
-//                @Override
-//                public void onSuccess(List<Transaction> transactions) {
-//                    if (mViewReference != null && mViewReference.get() != null) {
-//                        mViewReference.get().showLoading(false);
-//                        mViewReference.get().showTransactionsHistory(transactions);
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure() {
-//                    if (mViewReference != null && mViewReference.get() != null) {
-//                        mViewReference.get().showLoading(false);
-//                        mViewReference.get().showNoData(true, R.string.no_data);
-//                    }
-//                }
-//            });
-//        }
-    }
-
-    @Override
     public void validate(String userId, Double amount) {
         if (mViewReference != null && mViewReference.get() != null) {
 
@@ -61,7 +30,7 @@ public class MerchantPresenter implements MerchantContract.Presenter {
 
             transactionsRepo.requestPayment(userId, amount, new RequestPaymentCallBack() {
                 @Override
-                public void onSuccess() {
+                public void onSuccess(String pinCode) {
                     if (mViewReference != null && mViewReference.get() != null) {
                         mViewReference.get().showValidationSuccess();
                         mViewReference.get().showLoading(false);

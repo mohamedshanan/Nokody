@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
+import com.nokody.merchant.data.models.User;
 import com.nokody.merchant.utils.Constants;
 
 import butterknife.BindView;
@@ -21,9 +22,12 @@ public class CustomerMainActivity extends BaseActivity {
     @BindView(R.id.tvBalance)
     TextView tvBalance;
 
+    private String myPassport;
+
     @Nullable
-    public static Intent buildIntent(@NonNull Context context, Double balance) {
+    public static Intent buildIntent(@NonNull Context context, String userPassport, Double balance) {
         Intent intent = new Intent(context, CustomerMainActivity.class);
+        intent.putExtra(Constants.USER_PASSPORT, userPassport);
         intent.putExtra(Constants.USER_TYPE_CUSTOMER, balance);
         return intent;
     }
@@ -39,7 +43,7 @@ public class CustomerMainActivity extends BaseActivity {
         if (item.getItemId() == R.id.action_history){
             mNavigator.history();
         } else if (item.getItemId() == R.id.action_transfer){
-
+            mNavigator.transfer(myPassport);
         }
         return true;
     }
@@ -61,6 +65,8 @@ public class CustomerMainActivity extends BaseActivity {
 
     @Override
     protected void afterInflation(Bundle savedInstance) {
+
+        myPassport = getIntent().getStringExtra(Constants.USER_PASSPORT);
 
         if (getIntent() != null && getIntent().hasExtra(Constants.USER_TYPE_CUSTOMER)) {
             Double balance = getIntent().getDoubleExtra(Constants.USER_TYPE_CUSTOMER, 0.0);

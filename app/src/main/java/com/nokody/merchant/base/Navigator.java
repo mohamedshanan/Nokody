@@ -8,6 +8,7 @@ import com.nokody.merchant.views.login.LoginActivity;
 import com.nokody.merchant.views.merchant.checkout.main.CheckoutActivity;
 import com.nokody.merchant.views.merchant.history.HistoryActivity;
 import com.nokody.merchant.views.merchant.main.MerchantMainActivity;
+import com.nokody.merchant.views.transfer.main.TransferActivity;
 
 public class Navigator {
 
@@ -23,9 +24,9 @@ public class Navigator {
         }
     }
 
-    public void customerHome(Double balance) {
+    public void customerHome(String userPassport, Double balance) {
         if (mContext != null){
-            mContext.startActivity(CustomerMainActivity.buildIntent(mContext, balance));
+            mContext.startActivity(CustomerMainActivity.buildIntent(mContext, userPassport, balance));
         }
     }
 
@@ -46,4 +47,11 @@ public class Navigator {
             mContext.startActivity(HistoryActivity.buildIntent(mContext));
         }
     }
+
+    public void transfer(String userId) {
+        if (mContext != null){
+            mContext.startActivity(TransferActivity.buildIntent(mContext, userId));
+        }
+    }
+
 }

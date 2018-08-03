@@ -1,6 +1,5 @@
 package com.nokody.merchant.data.rest;
 
-import com.nokody.merchant.data.models.HistoryResponse;
 import com.nokody.merchant.data.models.LoginData;
 import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.data.models.PaymentBody;
