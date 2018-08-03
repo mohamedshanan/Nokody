@@ -32,6 +32,8 @@
         <activity android:name=".views.merchant.main.MerchantMainActivity" />
         <activity android:name=".views.customer.main.CustomerMainActivity" />
         <activity android:name=".views.merchant.checkout.main.CheckoutActivity" />
+        <activity android:name=".views.reader.ReaderActivity"></activity>
+        <activity android:name=".views.merchant.history.HistoryActivity"></activity>
 
         <service android:name=".fcm.MyFirebaseMessagingService">
             <intent-filter>
@@ -51,8 +53,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
-        <activity android:name=".views.reader.ReaderActivity"></activity>
-        <activity android:name=".views.merchant.history.HistoryActivity"></activity>
     </application>
 
 </manifest>

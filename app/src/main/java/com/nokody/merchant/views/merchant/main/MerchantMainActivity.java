@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.nokody.merchant.R;
 import com.nokody.merchant.base.BaseActivity;
-import com.nokody.merchant.data.models.LoginResponse;
 import com.nokody.merchant.utils.Constants;
 import com.nokody.merchant.utils.Utilities;
 import com.nokody.merchant.views.reader.ReaderActivity;
@@ -57,7 +56,7 @@ public class MerchantMainActivity extends BaseActivity implements MerchantContra
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.merchant_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.nokody.merchant.R;
@@ -27,18 +29,34 @@ public class CustomerMainActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_history){
+            mNavigator.history();
+        } else if (item.getItemId() == R.id.action_transfer){
+
+        }
+        return true;
+    }
+
+    @Override
     protected int getActivityView() {
         return R.layout.activity_customer_main;
     }
 
     @Override
     protected int getToolbarTitleResource() {
-        return 0;
+        return R.string.home;
     }
 
     @Override
     protected boolean isHomeAsUpEnabled() {
-        return false;
+        return true;
     }
 
     @Override
