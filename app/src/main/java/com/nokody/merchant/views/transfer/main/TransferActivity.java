@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,9 +34,7 @@ public class TransferActivity extends BaseActivity implements TransferContract.V
     @Nullable
     @BindView(R.id.etPassport)
     EditText etPassport;
-    @Nullable
-    @BindView(R.id.scan)
-    ImageView scan;
+
     @Nullable
     @BindView(R.id.tvValidateError)
     TextView tvValidateError;
@@ -76,9 +75,20 @@ public class TransferActivity extends BaseActivity implements TransferContract.V
         presenter.attachView(this);
         myId = getIntent().getStringExtra(Constants.USER_PASSPORT);
 
-        scan.setOnClickListener(v -> {
-            startActivityForResult(new Intent(this, ReaderActivity.class)
-                    , QR_READER_CODE);
+        etPassport.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_LEFT = 0;
+            final int DRAWABLE_TOP = 1;
+            final int DRAWABLE_RIGHT = 2;
+            final int DRAWABLE_BOTTOM = 3;
+
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (etPassport.getRight() - etPassport.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    startActivityForResult(new Intent(this, ReaderActivity.class)
+                            , QR_READER_CODE);
+                    return true;
+                }
+            }
+            return false;
         });
 
         validateBtn.setOnClickListener(v -> {
